@@ -1,0 +1,14 @@
+.schedule-job-form {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px gray;
+}
+
+.schedule-job-form__push {
+    border: none;
+    margin: 0;
+    margin-top: 5px;
+}

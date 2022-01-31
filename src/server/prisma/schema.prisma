@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Job {
+  id                 String      @id @default(uuid())
+  createdAt          DateTime    @default(now())
+  details            JobDetail[]
+  notifyCount        Int
+  notifySuccessCount Int         @default(0)
+  notifyFailedCount  Int         @default(0)
+}
+
+model JobDetail {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  detail    Json
+  job       Job      @relation(fields: [jobId], references: [id])
+  jobId     String
+}

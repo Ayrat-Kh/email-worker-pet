@@ -1,0 +1,15 @@
+.job-card {
+    border: 1px solid;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px gray;
+}
+
+.job-card__item-title {
+    display: inline;
+    color: #afafaf;
+}
+
+.job-card__item-title--main {
+    font-size: 20px;
+}

@@ -1,34 +1,24 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# How to build locally
 
-## Getting Started
+1. clone the project
+2. yarn
+3. docker-compose.dev.yaml (wait for db initialization)
+4. yarn db:migrate
+5. yarn db:generate
+6. yarn dev
+7. http:://localhost:3000, should work
 
-First, run the development server:
+# How to build containerazed
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+1. clone the project
+2. docker build -t email-worker:latest .
+3. docker-compose.yaml, (probably the app can end up because db haven't started yet. For now, just restart it, please)
+4. http:://localhost:3000, should work
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Some strange behaviour:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+sometimes on my machine it seems like the socket is hanging up. Maybe it related to WSL2, need to check.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## if kafka can not start try to remove zookeper and kafka volumes
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+`docker volume rm email-worker_kafka_data email-worker_zookeper_data`

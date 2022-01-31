@@ -1,22 +1,36 @@
 {
-  "name": "email-worker",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "next": "12.0.9",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
-  },
-  "devDependencies": {
-    "@types/node": "17.0.13",
-    "@types/react": "17.0.38",
-    "eslint": "8.8.0",
-    "eslint-config-next": "12.0.9",
-    "typescript": "4.5.5"
-  }
+    "name": "email-worker",
+    "private": true,
+    "scripts": {
+        "dev": "ts-node --project tsconfig.server.json src/server/index.ts",
+        "build:server": "tsc --project tsconfig.server.json",
+        "build:next": "next build",
+        "build": "npm run build:next && npm run build:server",
+        "start": "NODE_ENV=production node dist/server/index.js",
+        "lint": "next lint",
+        "db:generate": "yarn prisma generate --schema ./src/server/prisma/schema.prisma",
+        "db:migrate": "yarn prisma migrate dev --schema ./src/server/prisma/schema.prisma",
+        "db:pull": "yarn prisma db pull --schema ./src/server/prisma/schema.prisma",
+        "db:push": "yarn prisma db push --schema ./src/server/prisma/schema.prisma"
+    },
+    "dependencies": {
+        "@prisma/client": "^3.8.1",
+        "express": "^4.17.2",
+        "kafkajs": "^1.15.0",
+        "next": "12.0.9",
+        "prisma": "^3.8.1",
+        "react": "17.0.2",
+        "react-dom": "17.0.2",
+        "socket.io": "^4.4.1",
+        "socket.io-client": "^4.4.1"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.13",
+        "@types/node": "^17.0.13",
+        "@types/react": "17.0.38",
+        "eslint": "8.8.0",
+        "eslint-config-next": "12.0.9",
+        "ts-node": "^10.4.0",
+        "typescript": "4.5.5"
+    }
 }
